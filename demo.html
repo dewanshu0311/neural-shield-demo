@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neural Shield Demo</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #020617;
+      color: white;
+      font-family: sans-serif;
+    }
+    #status {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="status">⌛ Initializing Neural Shield...</div>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.152.2/examples/jsm/",
+      "@pixiv/three-vrm": "https://unpkg.com/@pixiv/three-vrm@2.0.0/lib/three-vrm.module.js"
+    }
+  }
+</script>
+
+<script type="module">
+  // Now we can just use simple names because the Map above handles the URLs!
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+  import { VRMLoaderPlugin } from '@pixiv/three-vrm';
+
+  // --- STANDARD THREE.JS SETUP ---
+  
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x020617);
+
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 1.4, 3);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 1.4, 0);
+  controls.update();
+
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(1, 1, 1);
+  scene.add(light);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+  // --- LOADING THE MODEL ---
+  
+  const loader = new GLTFLoader();
+  loader.register((parser) => new VRMLoaderPlugin(parser));
+
+  document.getElementById("status").innerText = "⌛ Downloading Model...";
+
+  loader.load(
+    "./patient.vrm", 
+    (gltf) => {
+      const vrm = gltf.userData.vrm;
+      scene.add(vrm.scene);
+      vrm.scene.rotation.y = Math.PI; 
+      
+      console.log("Success!");
+      document.getElementById("status").innerText = "✅ Neural Shield: Patient Loaded";
+      document.getElementById("status").style.color = "#4ade80";
+    },
+    (progress) => {
+      console.log("Loading...", 100.0 * (progress.loaded / progress.total) + "%");
+    },
+    (error) => {
+      console.error(error);
+      document.getElementById("status").innerText = "❌ Error: Check Console";
+      document.getElementById("status").style.color = "#ef4444";
+    }
+  );
+
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+</script>
+</body>
+</html>
