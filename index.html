@@ -1,34 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Neural Shield</title>
-  <style>
-    body {
-      background: #0f172a;
-      color: white;
-      font-family: Arial;
-      text-align: center;
-      padding-top: 100px;
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEURO-SHIELD OS | Neural Interface Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CYBERPUNK STYLING --- */
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #050b14; /* Deep space blue */
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* The Background Grid Effect */
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: fixed;
+            top: 0; left: 0; w: 100%; h: 100%;
+            z-index: -1;
+        }
+
+        h1, h2, h3, .brand-font {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(16, 23, 41, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+
+        /* Neon Buttons */
+        .btn-primary {
+            background: linear-gradient(45deg, #0284c7, #0891b2);
+            border: 1px solid #22d3ee;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.6);
+            filter: brightness(1.2);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+    </style>
 </head>
-<body>
+<body class="antialiased">
 
-  <h1>🧠 Neural Shield</h1>
-  <p>Neural Implant Verification & Visualization Platform</p>
+    <div class="bg-grid w-full h-full absolute"></div>
 
-  <br><br>
+    <nav class="fixed w-full z-50 border-b border-cyan-900/30 bg-slate-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-shield-virus text-cyan-400 text-3xl animate-pulse"></i>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold text-white tracking-widest leading-none">NEURO-SHIELD</span>
+                    <span class="text-xs text-cyan-500 font-mono tracking-[0.3em]">OPERATING SYSTEM</span>
+                </div>
+            </div>
 
-  <a href="demo.html">
-    <button>Open 3D Patient Visualization</button>
-  </a>
+            <div class="hidden md:flex gap-8 text-sm font-semibold text-cyan-100/70">
+                <a href="#overview" class="hover:text-cyan-400 transition">SYSTEM OVERVIEW</a>
+                <a href="#features" class="hover:text-cyan-400 transition">MODULES</a>
+                <a href="#analysis" class="hover:text-cyan-400 transition">LIVE ANALYSIS</a>
+            </div>
+
+            <a href="#analysis">
+                <button class="border border-cyan-500/50 text-cyan-400 px-6 py-2 rounded text-xs font-bold hover:bg-cyan-500/10 transition">
+                    SYSTEM STATUS: ONLINE
+                </button>
+            </a>
+        </div>
+    </nav>
+
+    <header id="overview" class="pt-40 pb-20 px-6 text-center relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-600/10 blur-[100px] rounded-full -z-10"></div>
+
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+            NEXT-GEN <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">NEURAL SECURITY</span>
+        </h1>
+        
+        <p class="max-w-2xl mx-auto text-slate-400 text-lg mb-10 leading-relaxed">
+            Protecting the integrity of Brain-Computer Interfaces. Real-time monitoring, unauthorized access prevention, and forensic analysis for the connected mind.
+        </p>
+
+        <div class="flex justify-center gap-4">
+            <a href="#analysis">
+                <button class="btn-primary px-8 py-4 rounded text-white font-bold tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-play"></i> LAUNCH LIVE SCAN
+                </button>
+            </a>
+            <button class="px-8 py-4 rounded border border-slate-700 text-slate-300 font-bold hover:border-cyan-500/50 transition">
+                READ DOCUMENTATION
+            </button>
+        </div>
+    </header>
+
+    <section id="analysis" class="max-w-7xl mx-auto px-6 mb-32">
+        <div class="glass-card rounded-xl p-1 border-t-4 border-cyan-500">
+            <div class="bg-slate-900/50 p-4 flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                    <h3 class="text-cyan-400 font-mono text-sm">LIVE PATIENT FEED // ID: 43851</h3>
+                </div>
+                <div class="font-mono text-xs text-slate-500">LATENCY: 12ms | ENCRYPTION: ACTIVE</div>
+            </div>
+
+            <div class="w-full h-[650px] bg-black relative">
+                <iframe 
+                    src="demo.html" 
+                    class="w-full h-full border-none"
+                    title="Neural Shield 3D">
+                </iframe>
+                
+                <div class="absolute top-4 left-4 pointer-events-none">
+                    <div class="bg-black/50 text-green-400 text-xs font-mono p-2 border-l-2 border-green-500 mb-1">
+                        CORTEX SIGNAL: STABLE
+                    </div>
+                    <div class="bg-black/50 text-cyan-400 text-xs font-mono p-2 border-l-2 border-cyan-500">
+                        IMPLANT TEMP: 37.2°C
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="max-w-7xl mx-auto px-6 pb-24">
+        <div class="flex items-center gap-4 mb-12">
+            <div class="h-px bg-slate-800 flex-1"></div>
+            <h2 class="text-2xl text-white font-bold">CORE CAPABILITIES</h2>
+            <div class="h-px bg-slate-800 flex-1"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass-card p-8 rounded-lg">
+                <div class="w-12 h-12 bg-blue-900/30 rounded flex items-center justify-center mb-6 text-blue-400">
+                    <i class="fa-solid fa-radar text-2xl"></i>
+                </div>
+                <h3 class="text-xl text-white font-bold mb-3">Threat Detection</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Continuous scanning of inbound neural packets to identify malicious patterns or unauthorized write attempts to the cortex.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 rounded-lg">
+                <div class="w-12 h-12 bg-purple-900/30 rounded flex items-center justify-center mb-6 text-purple-400">
+                    <i class="fa-solid fa-file-shield text-2xl"></i>
+                </div>
+                <h3 class="text-xl text-white font-bold mb-3">Integrity Verification</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Cryptographic hashing of implant firmware to ensure no tampering or "jailbreaking" of the medical device has occurred.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 rounded-lg">
+                <div class="w-12 h-12 bg-emerald-900/30 rounded flex items-center justify-center mb-6 text-emerald-400">
+                    <i class="fa-solid fa-network-wired text-2xl"></i>
+                </div>
+                <h3 class="text-xl text-white font-bold mb-3">Forensic Logging</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Immutable blockchain-based logs of all neural activity, allowing for post-incident analysis and legal verification.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-900 bg-slate-950 py-12 text-center">
+        <div class="mb-4">
+            <i class="fa-solid fa-shield-virus text-slate-600 text-3xl"></i>
+        </div>
+        <p class="text-slate-500 text-sm font-mono">
+            NEURO-SHIELD OS © 2026<br>
+            SECURE. VERIFIED. HUMAN.
+        </p>
+    </footer>
 
 </body>
 </html>
